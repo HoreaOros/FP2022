@@ -72,7 +72,7 @@ namespace _10_25
             if (a > b)
             {
                 aux = a;
-                a = b;
+                a = b; 
                 b = aux;
 
                 // alternativa
