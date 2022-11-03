@@ -12,7 +12,7 @@ namespace _11_01
         {
             //TestLeapYear();
             // TODO: scrieti o functie care determina numarul de zile dintre doua date calendaristice
-            //Days_Between_Dates // TODO Completat
+            Days_Between_Dates(); // TODO Completat
 
             //x < 100 || Die();
             // if(x[i] % 2 == 0 && i < n) - nu e OK
@@ -319,7 +319,7 @@ namespace _11_01
                 dateI[2] = int.Parse(dateS[2]);
                 DateTime an2 = new DateTime(dateI[2], dateI[1], dateI[0]);
                 TimeSpan distance = an2 - an1;
-                Console.WriteLine($"Sunt {distance.Days} de zile intre cele 2 date introduse");
+                Console.WriteLine($"Sunt {Math.Abs(distance.Days)} de zile intre cele 2 date introduse");
             }
             catch (Exception)
             {
