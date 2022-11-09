@@ -19,7 +19,7 @@ namespace _11_08
             //fractie2();
 
             F1(5);
-            F2(100000);
+            F2(1000000);
         }
         // TODO: Tema // done
         /// <summary>
@@ -38,14 +38,14 @@ namespace _11_08
             {
                 for (int j = i; j <= 2 * i - 1; j++)
                 {
-                    while(count <= k)
-                    {
-                        count++;
+                    if (count <= k)
+                    {                       
                         Console.Write($"{j} ");
-                        break;
-                    }
-                    if (count > k) 
+                        count++;
+                    }                   
+                    if (count > k) // sa nu ruleze degeaba dupa ce ajungem la numarul de elemente afisate dorit
                     {
+                        Console.WriteLine();
                         return;
                     }
                 }
