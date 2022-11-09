@@ -19,7 +19,7 @@ namespace _11_08
             //fractie2();
 
             F1(5);
-            F2(10);
+            F2(100000);
         }
         // TODO: Tema // done
         /// <summary>
@@ -43,6 +43,10 @@ namespace _11_08
                         count++;
                         Console.Write($"{j} ");
                         break;
+                    }
+                    if (count > k) 
+                    {
+                        return;
                     }
                 }
             }
