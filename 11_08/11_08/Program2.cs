@@ -33,24 +33,18 @@ namespace _11_08
                 Console.WriteLine("null");
                 return;
             }
-            int n = 1;
-            int sum = 1;
-            while (k > sum) // sa nu genereze prea multe elemente inutile in lista. 
-            {               
-                n++;
-                sum = (n * (n + 1)) / 2;
-            }
-            List<int> secventa = new List<int>();          
-            for (int i = 1; i <= n; i++)
+            int count = 1;                 
+            for (int i = 1; i <= k; i++)
             {
                 for (int j = i; j <= 2 * i - 1; j++)
                 {
-                    secventa.Add(j);
+                    while(count <= k)
+                    {
+                        count++;
+                        Console.Write($"{j} ");
+                        break;
+                    }
                 }
-            }
-            for (int i = 0; i < k; i++)
-            {
-                Console.Write(secventa[i]+" ");
             }
             Console.WriteLine();
         }
