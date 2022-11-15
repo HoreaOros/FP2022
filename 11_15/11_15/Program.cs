@@ -1,10 +1,13 @@
-﻿
+
 
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Globalization;
+using System.Runtime.InteropServices;
+
 namespace _11_15
 {
     // vectori
@@ -24,7 +27,7 @@ namespace _11_15
             PrintArray(v2);
             PrintArray(v3);
 
-            //LRSNO(v2);
+            LRSNO(v2);
 
 
             int k = rnd.Next(100);
@@ -35,7 +38,7 @@ namespace _11_15
             }
             else
                 Console.WriteLine($"Nu am gasit elementul {k} in vector");
-
+            
 
             Array.Sort(v2);
             PrintArray(v2);
@@ -50,12 +53,24 @@ namespace _11_15
             // Implementati operatiile de cautare aproximativa:
             // Rank, predecesor, succesor, cel mai aporpiat vecin. 
 
+            int rank = LowerBound(v2, k);
+            int predecesor = v2[Math.Max(LowerBound(v2,k)-1, 0)]; //pentru a nu iesi indexul din vector
+            int succesor = v2[Math.Min(UpperBound(v2,k),v2.Length-1)];//pentru a nu iesi indexul din vector
+            int cmav = 0;
+            if (k - predecesor < succesor - k)
+                cmav = predecesor;
+            else
+                cmav = succesor;
+            Console.WriteLine($"k: {k} rank: {rank}, predecesor: {predecesor}, succesor: {succesor}, cel mai apropiat vecin: {cmav}");
+            
 
             v4 = InitArray(1000000, 10);
             //PrintArray(v4);
             int[] f = InitArray(10);
             DeterminaFrecvente(v4, f);
             PrintArray("Frecventa de aparitie a cifrelor este: ", f);
+            
+            Console.ReadLine();
         }
 
         private static void DeterminaFrecvente(int[] v, int[] f)
@@ -95,6 +110,42 @@ namespace _11_15
             return -1;
         }
 
+        private static int LowerBound(int[] v, int k)
+        {
+            int st, dr, mij;
+            st = 0;
+            dr = v.Length - 1;
+            while (st < dr)
+            {
+                mij = (st + dr)/2;
+                if (v[mij] < k)
+                    st = mij + 1;      
+                else
+                    dr = mij;
+            }
+            if (st < v.Length && v[st] < k)
+                st++;
+            return st;
+        }
+
+        private static int UpperBound(int[] v, int k)
+        {
+            int st, dr, mij;
+            st = 0;
+            dr = v.Length - 1;
+            while (st < dr)
+            {
+                mij = (st + dr)/ 2;
+                if (v[mij] <= k)
+                    st = mij + 1;
+                else
+                    dr = mij;
+            }
+            if (st < v.Length && v[st]<k)
+                st++;
+            return st;
+        }
+
         /// <summary>
         /// Se cauta in vectorul v cheia k.
         /// Cautare liniara cu comlexitate O(n)
@@ -130,7 +181,57 @@ namespace _11_15
         /// <exception cref="NotImplementedException"></exception>
         private static void LRSNO(int[] v)
         {
-            throw new NotImplementedException();
+            int[] p = new int[v.Length];//vector ce stocheaza lungimea maxima
+                                        //a unei secvente repetabile care se termina cu elementul respectiv
+            //cazurile de baza
+            for (int i = 0; i < v.Length; i++)
+                p[i] = 1;//lungimea minima pe care o poate avea o secventa este 1
+            for (int i = 1; i < v.Length - 1; i++)//tratam separat elementul de pe pozitia 0
+                if (v[0] == v[i] && v[1] == v[i + 1])
+                {
+                    p[1] = 2;
+                    break;
+                }
+            //cazul general
+            for (int i=1;i<v.Length-1;i++)//pentru fiecare element din vector
+            {
+                for(int j=i+1;j<v.Length;j++)//cautam printre elementele care il urmeaza, un element care respecta proprietatea ceruta
+                {
+                    if (v[i] == v[j] && v[i - 1] == v[j - 1])//daca gasim un element de acest fel
+                        p[j] = p[j - 1] + 1;//lungimea maxima a secventei creste pentru elementul respectiv
+                }
+            }
+
+            //caut pozitia pe care se afla ultima secventa repetabila de lungime maxima
+            int maxVal = p[0];
+            int pozMaxVal = 0;
+
+            for(int i=1;i<v.Length;i++)
+            {
+                if (p[i]>=maxVal)
+                {
+                    maxVal= p[i];
+                    pozMaxVal = i;
+                }
+            }
+
+            //afisare
+            Console.Write("Ultima secventa de lungime maxima care se repeta este: ");
+            AfiseazaSecventa(v, p, pozMaxVal);
+            Console.WriteLine();
+        }
+
+        /// <summary>
+        /// afiseaza recursiv o secventa de lungime maxima
+        /// </summary>
+        /// <param name="v"></param>
+        /// <param name="p"></param>
+        /// <param name="poz"></param>
+        private static void AfiseazaSecventa(int[] v, int[] p, int poz)
+        {
+            if (p[poz]>1)
+                AfiseazaSecventa(v, p, poz - 1);
+            Console.Write($"{v[poz]} ");
         }
 
         private static void PrintArray(int[] v)
