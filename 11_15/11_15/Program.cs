@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Linq;
+
 namespace _11_15
 {
     // vectori
@@ -14,6 +16,7 @@ namespace _11_15
         static void Main(string[] args)
         {
             int[] v1, v2, v3, v4;
+            int[] vtest = new int[] { 1,2,3,4,5,2,3,4 };
             //v = new int[] { 0, 1, 2, 3};
 
             v1 = InitArray(10);
@@ -23,13 +26,13 @@ namespace _11_15
             PrintArray(v1);
             PrintArray(v2);
             PrintArray(v3);
-
-            //LRSNO(v2);
-
+            // todo - done
+            LRSNO(vtest);
+            // todo
 
             int k = rnd.Next(100);
             int pos;
-            if ((pos = Cautare(v2, k) ) != -1)
+            if ((pos = Cautare(v2, k)) != -1)
             {
                 Console.WriteLine($"Am gasit elementul {k} pe pozitia {pos}");
             }
@@ -40,22 +43,65 @@ namespace _11_15
             Array.Sort(v2);
             PrintArray(v2);
 
-            if((pos = CautareBinara(v2, k)) != -1)
+            if ((pos = CautareBinara(v2, k)) != -1)
                 Console.WriteLine($"Am gasit elementul {k} pe pozitia {pos}");
             else
                 Console.WriteLine($"Nu am gasit elementul {k} in vector");
 
-            // TODO
+            // TODO - done
             // https://en.wikipedia.org/wiki/Binary_search_algorithm
             // Implementati operatiile de cautare aproximativa:
             // Rank, predecesor, succesor, cel mai aporpiat vecin. 
+            CautareBinaraExtra(v2, k);
 
+            ////v4 = InitArray(1000000, 10);
+            ////PrintArray(v4);
+            ////int[] f = InitArray(10);
+            ////DeterminaFrecvente(v4, f);
+            ////PrintArray("Frecventa de aparitie a cifrelor este: ", f);
+        }
+        private static void CautareBinaraExtra(int[] v, int k)
+        {
+            int stg, dr, mij;
+            int count = 0;
+            int finds;
+            int predecessor = 0;
+            int successor = v.Length;
+            int vecin;
+            int rank;
 
-            v4 = InitArray(1000000, 10);
-            //PrintArray(v4);
-            int[] f = InitArray(10);
-            DeterminaFrecvente(v4, f);
-            PrintArray("Frecventa de aparitie a cifrelor este: ", f);
+            stg = 0;
+            dr = v.Length - 1;
+            while (stg <= dr)
+            {
+                mij = (stg + dr) / 2;
+                if (v[mij] < k)
+                {
+                    stg = mij + 1;
+                    predecessor = mij;
+                }
+                else if (v[mij] > k)
+                {
+                    dr = mij - 1;
+                    successor = mij;
+                }
+
+                else
+                {
+                    finds = mij;
+                }
+            }
+            if (v[predecessor] > v[successor])
+            {
+                vecin = predecessor;
+            }
+            else
+            {
+                vecin = successor;
+            }
+            rank = predecessor + 1;
+            Console.WriteLine($"Pentru {k}:{Environment.NewLine}Rank:{rank}.{Environment.NewLine}Sucessor:{v[successor]}.{Environment.NewLine}Predecessor:{v[predecessor]}.{Environment.NewLine}Vecin:{v[vecin]}.");
+            return;
         }
 
         private static void DeterminaFrecvente(int[] v, int[] f)
@@ -127,12 +173,70 @@ namespace _11_15
         /// 1 2 3 4 5 2 3 4 -> rezultatul este 2 3 4 
         /// </example>
         /// <param name="v"></param>
-        /// <exception cref="NotImplementedException"></exception>
         private static void LRSNO(int[] v)
         {
-            throw new NotImplementedException();
-        }
+            List<int> list = new List<int>(); // lista de referinta ( clona vectorului )
+            List<string> listst = new List<string>(); // lista secventelor repetate
+            List<int> liststlength = new List<int>(); // lista lungimii secventelor repetate
+            int count = 0; // contor pt lungimea secventei
+            for (int j = 0; j < v.Length; j++) 
+            {
+                if (list.Contains(v[j])) // daca lista o contine pe v[j] atunci ii o sansa de repetitie.
+                {
+                    
+                    for (int i = 0; i < j; i++)
+                    {
+                        int f = j; // sa nu se suprapuna aici secventa repetata
+                        int k = i;
+                        string toadd = "";
+                        count = 0;
+                        while (f < v.Length && k < j && v[k] == v[f]) // se verifica o secventa care se repeta si se adauga intr-o lista
+                        {
+                            
+                            toadd = toadd + Convert.ToString(v[k] + " ");
+                            k++;
+                            f++;
+                            count++;
+                            
+                        }
+                        liststlength.Add(count);
+                        listst.Add(toadd);
+                        //Console.WriteLine();
+                    }                
+                }
+                else
+                {
+                    list.Add(v[j]);
+                }
+            }
+            int[] lengthcheck = liststlength.ToArray(); // tablou pt lungimea secventelor repetate
+            string[] tocheck = listst.ToArray(); // tablou pt secventele repetate in format string
+            int longestst = 0; 
+            for(int i = 0; i < tocheck.Length; i++) // gasirea celei mai lungi secvente repetate.
+            {
+                if (lengthcheck[i] > longestst)
+                {
+                    longestst = lengthcheck[i];
+                }
+                //Console.WriteLine(lengthcheck[i]);
+            }
+            if (longestst > 1)
+            {
+                for (int i = 0; i < tocheck.Length; i++)
+                {
+                    if (longestst == lengthcheck[i])
+                    {
+                        Console.WriteLine(tocheck[i]);
+                        Console.WriteLine();
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("tabloul nu are o secventa de minimum 2 numere care se repeta.");
+            }
 
+        }        
         private static void PrintArray(int[] v)
         {
             for (int i = 0; i < v.Length; i++)

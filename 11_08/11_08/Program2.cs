@@ -19,7 +19,7 @@ namespace _11_08
             //fractie2();
 
             F1(5);
-            F2(1000000);
+            F2(10);
         }
         // TODO: Tema // done
         /// <summary>
