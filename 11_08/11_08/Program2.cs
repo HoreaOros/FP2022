@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,19 +19,38 @@ namespace _11_08
             //fractie2();
 
             F1(5);
-            F2(10);
+            F2(1000000);
         }
-
-        // TODO: Tema
+        // TODO: Tema // done
         /// <summary>
         /// Afisez primele n elemente ale secventei
         /// 1 2 3 3 4 5 4 5 6 7 ... 
         /// </summary>
-        /// <param name="v"></param>
-        /// <exception cref="NotImplementedException"></exception>
-        private static void F2(int v)
+        private static void F2(int k)
         {
-            throw new NotImplementedException();
+            if (k <= 0)
+            {
+                Console.WriteLine("null");
+                return;
+            }
+            int count = 1;                 
+            for (int i = 1; i <= k; i++)
+            {
+                for (int j = i; j <= 2 * i - 1; j++)
+                {
+                    if (count <= k)
+                    {                       
+                        Console.Write($"{j} ");
+                        count++;
+                    }                   
+                    if (count > k) // sa nu ruleze degeaba dupa ce ajungem la numarul de elemente afisate dorit
+                    {
+                        Console.WriteLine();
+                        return;
+                    }
+                }
+            }
+            Console.WriteLine();
         }
 
         /// <summary>
@@ -54,7 +75,11 @@ namespace _11_08
         private static void fractie2()
         {
             int m = 13, n = 30;
-            // TODO aducem fractia la forma ireductibila. 
+            // TODO aducem fractia la forma ireductibila.
+            int d = CMMDC(m, n);
+            m /= d;
+            n /= d;
+            // todo compplete
             int parteInt, parteFract;
             parteInt = m / n; // 0
             parteFract = m % n; // 13
@@ -124,6 +149,17 @@ namespace _11_08
                 n /= 10;
             }
             return contor;
+        }
+        public static int CMMDC(int a, int b)
+        {
+            int r;
+            while (b != 0)
+            {
+                r = a % b;
+                a = b;
+                b = r;
+            }
+            return a;
         }
     }
 }

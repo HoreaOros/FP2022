@@ -12,14 +12,16 @@ namespace _11_01
         {
             //TestLeapYear();
             // TODO: scrieti o functie care determina numarul de zile dintre doua date calendaristice
+            Days_Between_Dates(); // TODO Completat
 
             //x < 100 || Die();
             // if(x[i] % 2 == 0 && i < n) - nu e OK
             // if(i < n && x[i] % 2 == 0) - e OKish
 
-            //Palindrom();
+            // Palindrom();
             // TODO: Sa se determine cel mai lung sufix palindrom al unui numar
             // Ex. 98121121
+            //SufixPalindrom(); // TODO Completat
 
             //Stars1();
             //Stars2();
@@ -29,7 +31,27 @@ namespace _11_01
             //Stars5();
 
 
-            Coins();
+            //Coins();
+        }
+
+        private static void SufixPalindrom()
+        {
+            Console.WriteLine("Introduceti numarul de testat:");
+            int n = int.Parse(Console.ReadLine());
+            int naux = n;
+            int naux2 = 0;
+            int naux3 = 0;
+            while (naux > 0)
+            {
+                naux2 = naux2 * 10 + naux % 10;
+                naux = naux / 10;
+                if (naux2.IsPalindrom())
+                {
+                    naux3 = naux2;
+                }
+                
+            }
+            Console.WriteLine($"Cel mai lung sufix palindrom al numarului {n} este {naux3}");
         }
 
         private static void Coins()
@@ -72,7 +94,7 @@ namespace _11_01
             Console.WriteLine($"Wins: {wins}, Losses: {losses}");
         }
 
-        // TODO
+        // TODO - done
         /// <summary>
         /// pt n = 4
         /// ********
@@ -86,10 +108,45 @@ namespace _11_01
         /// </summary>
         private static void Stars5()
         {
-            throw new NotImplementedException();
+            int n;
+            n = int.Parse(Console.ReadLine());
+            for (int i = 1; i <= n; i++)
+            {
+                for (int j = 1; j <= n - i + 1; j++)
+                {
+                    Console.Write('*');
+                }
+                for (int j = 1; j <= 2 * (i - 1); j++)
+                {
+                    Console.Write(' ');
+                }
+                for (int j = 1; j <= n - i + 1; j++)
+                {
+                    Console.Write('*');
+                }
+
+                Console.WriteLine();
+            }
+            for (int i = n; i > 0; i--)
+            {
+                for (int j = 1; j <= n - i + 1; j++)
+                {
+                    Console.Write('*');
+                }
+                for (int j = 1; j <= 2 * (i - 1); j++)
+                {
+                    Console.Write(' ');
+                }
+                for (int j = 1; j <= n - i + 1; j++)
+                {
+                    Console.Write('*');
+                }
+
+                Console.WriteLine();
+            }
         }
 
-        // TODO
+        // TODO - done
         /// <summary>
         /// pt n = 4 se va afisa:
         /// *      *
@@ -99,7 +156,26 @@ namespace _11_01
         /// <summary>
         private static void Stars4()
         {
-            throw new NotImplementedException();
+            int n;
+            //Console.ForegroundColor = ConsoleColor.Green;
+            n = int.Parse(Console.ReadLine());
+            for (int i = n; i > 0; i--)
+            {
+                for (int j = 1; j <= n - i + 1; j++)
+                {
+                    Console.Write('*');
+                }
+                for (int j = 1; j <= 2 * (i - 1); j++)
+                {
+                    Console.Write(' ');
+                }
+                for (int j = 1; j <= n - i + 1; j++)
+                {
+                    Console.Write('*');
+                }
+
+                Console.WriteLine();
+            }
         }
 
         /// <summary>
@@ -219,6 +295,37 @@ namespace _11_01
 
             EsteBisect(n);
             
+        }
+        private static void Days_Between_Dates()
+        {
+            try
+            {
+                Console.WriteLine("Introduceti prima data in format DD/MM/YYYY (ZZ/LL/AAAA):");
+                string date1 = Console.ReadLine();
+                date1 = date1.Replace(" ", "/");
+                string[] dateS = date1.Split('/', (char)StringSplitOptions.RemoveEmptyEntries);
+                int[] dateI = new int[3];
+                dateI[0] = int.Parse(dateS[0]);
+                dateI[1] = int.Parse(dateS[1]);
+                dateI[2] = int.Parse(dateS[2]);
+                DateTime an1 = new DateTime(dateI[2], dateI[1], dateI[0]);
+
+                Console.WriteLine("Introduceti a doua data in format DD/MM/YYYY (ZZ/LL/AAAA):");
+                date1 = Console.ReadLine();
+                date1 = date1.Replace(" ", "/");
+                dateS = date1.Split('/', (char)StringSplitOptions.RemoveEmptyEntries);
+                dateI[0] = int.Parse(dateS[0]);
+                dateI[1] = int.Parse(dateS[1]);
+                dateI[2] = int.Parse(dateS[2]);
+                DateTime an2 = new DateTime(dateI[2], dateI[1], dateI[0]);
+                TimeSpan distance = an2 - an1;
+                Console.WriteLine($"Sunt {Math.Abs(distance.Days)} de zile intre cele 2 date introduse");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Data / Datele nu au fost introduse corect!!!");
+                Console.ReadKey();
+            }
         }
 
     }
