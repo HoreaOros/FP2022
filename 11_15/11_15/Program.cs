@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Linq;
+using System.Globalization;
+using System.Runtime.InteropServices;
 
 namespace _11_15
 {
@@ -175,7 +177,7 @@ namespace _11_15
         /// <param name="v"></param>
         private static void LRSNO(int[] v)
         {
-            List<int> list = new List<int>(); // lista de referinta ( clona vectorului )
+            List<int> list = new List<int>(); // lista de referinta din care verificam daca este o secventa care se repeta sau nu
             List<string> listst = new List<string>(); // lista secventelor repetate
             List<int> liststlength = new List<int>(); // lista lungimii secventelor repetate
             int count = 0; // contor pt lungimea secventei
