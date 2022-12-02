@@ -22,7 +22,7 @@ namespace _11_22
 
             //InsertionSort(v);
             //P15.Program.PrintArray(v);
-            DoublingTest();
+            DoublingTest(MergeSort);
 
 
             
@@ -77,7 +77,7 @@ namespace _11_22
             }
         }
 
-        public static void DoublingTest()
+        public static void DoublingTest(Action<int[]> sort)
         {
             Stopwatch sw = new Stopwatch();
             int[] v;
@@ -85,7 +85,7 @@ namespace _11_22
             {
                 v = P15.Program.InitArray(N, 100000);
                 sw.Restart();
-                MergeSort(v);
+                sort(v);
                 sw.Stop();
                 Console.WriteLine($"N = {N} -->> {sw.ElapsedMilliseconds}");
             }
