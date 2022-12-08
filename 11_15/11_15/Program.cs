@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 namespace _11_15
 {
     // vectori
-    internal class Program
+    public class Program
     {
         static Random rnd = new Random();
         static void Main(string[] args)
@@ -153,7 +153,7 @@ namespace _11_15
         /// <param name="v">vectorul in care se cauta</param>
         /// <param name="k">cheia pe care o cautam</param>
         /// <returns>Pozitia pe care se afla cheia in vector sau -1 daca cheia nu este gasita</returns>
-        private static int Cautare(int[] v, int k)
+        public static int Cautare(int[] v, int k)
         {
             for (int i = 0; i < v.Length; i++)
             {
@@ -234,7 +234,7 @@ namespace _11_15
             Console.Write($"{v[poz]} ");
         }
 
-        private static void PrintArray(int[] v)
+        public static void PrintArray(int[] v)
         {
             for (int i = 0; i < v.Length; i++)
             {
@@ -243,7 +243,7 @@ namespace _11_15
             Console.WriteLine();
         }
 
-        private static int[] InitArray(int n, int max)
+        public static int[] InitArray(int n, int max)
         {
             int[] v;
             v = new int[n];
@@ -256,7 +256,7 @@ namespace _11_15
             return v;
         }
 
-        private static int[] InitArray(int n)
+        public static int[] InitArray(int n)
         {
             return new int[n];
         }

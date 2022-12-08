@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "12_06 curs", "12_06 curs\12_06 curs.csproj", "{11C59ABB-4CAF-4148-A40B-2B4A15B8DFE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matrici", "Matrici\Matrici.csproj", "{6D30B576-A36D-41CF-926A-0288095917EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{11C59ABB-4CAF-4148-A40B-2B4A15B8DFE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11C59ABB-4CAF-4148-A40B-2B4A15B8DFE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11C59ABB-4CAF-4148-A40B-2B4A15B8DFE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11C59ABB-4CAF-4148-A40B-2B4A15B8DFE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D30B576-A36D-41CF-926A-0288095917EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D30B576-A36D-41CF-926A-0288095917EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D30B576-A36D-41CF-926A-0288095917EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D30B576-A36D-41CF-926A-0288095917EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EF9E9D76-DA30-4B32-AF11-276245B3A0B2}
+	EndGlobalSection
+EndGlobal
