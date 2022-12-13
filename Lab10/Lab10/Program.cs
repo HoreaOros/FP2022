@@ -14,14 +14,43 @@ namespace Lab10
             ulong N;
             N = ulong.Parse(Console.ReadLine());
             //Console.WriteLine("{0}", M1(N));
-            Console.WriteLine("{0}", M2(N));
+            //Console.WriteLine("{0}", M2(N));
+            Console.WriteLine("{0}", M3(N));
+        }
+
+
+        /*
+         * n = 3k, 3k+1, 3k+2 
+         * (a + b) mod n = (a mod n + b mod n) mod n
+         * (a * b) mod n = (a mod n * b mod n) mod n
+         * (a * b * c) mod n = (a mod n * b mod n * c mod n) mod n
+         */
+
+        private static ulong M3(ulong n)
+        {
+            ulong a, b, c;
+            a = n;
+            b = n + 1;
+            c = 2 * n + 1;
+
+            if (a % 2 == 0)
+                a /= 2;
+            else
+                b /= 2;
+
+            if (a % 3 == 0)
+                a /= 3;
+            else if (b % 3 == 0)
+                b /= 3;
+            else
+                c /= 3;
+            return (a % MODULUS * b % MODULUS * c) % MODULUS;
         }
 
         private static ulong M2(ulong n)
         {
             ulong suma = 0;
             suma = n * (n + 1) * (2 * n + 1) / 6;
-
             return suma % MODULUS;
         }
 
