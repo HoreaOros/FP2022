@@ -16,7 +16,7 @@ namespace _11_08
 
             //fractie2();
 
-            F1(5);
+            //F1(5);
             F2(10);
         }
 
@@ -28,8 +28,22 @@ namespace _11_08
         /// <param name="v"></param>
         /// <exception cref="NotImplementedException"></exception>
         private static void F2(int v)
-        {
-            throw new NotImplementedException();
+        { Console.WriteLine("Introduceti numarul n");
+            int contor = 0;
+            int n=int.Parse(Console.ReadLine());
+            for(int i = 1; i <= v; i++)
+            {
+                for(int j = i; j <= 2 * i - 1; j++)
+                {
+                    if (contor < n)
+                    {
+                        Console.Write($"{j} ");
+                        contor++;
+                    }
+                    else break;
+                    
+                }
+            }
         }
 
         /// <summary>
