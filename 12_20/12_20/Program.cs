@@ -28,21 +28,21 @@ namespace _12_20
         private static int Est(int[,] m)
         {
             int sum = 0;
-            //TODO
+            //TODO: sum elementelor din est
             return sum;
         }
 
         private static int Vest(int[,] m)
         {
             int sum = 0;
-            //TODO
+            //TODO: suma elementelor din vest
             return sum;
         }
 
         private static int Sud(int[,] m)
         {
             int sum = 0;
-            //TODO
+            //TODO: suma elementelor din sud
             return sum;
         }
 
